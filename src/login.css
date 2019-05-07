@@ -1,0 +1,15 @@
+body{
+  background-color: #fff;
+}
+.btn-login{
+  margin: 2rem 15px;
+  background: rgb(254, 58, 59);
+  color:#fff;
+  border-radius: 2rem;
+}
+.password{
+  margin-top: 0.5rem;
+}
+.mobile{
+  margin-top: 2rem;
+}
