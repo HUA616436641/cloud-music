@@ -1,6 +1,11 @@
-body{
-    color: red;
-    .aaa{
-        color: green;
-    }
+.home-p{
+    position: absolute;
+    width: 100%;
+    top: 0;
+    bottom: 0;
+    background-image: url(./assets/image/bg.jpg);
+    background-size: cover;
+    background-position: center;
+    filter: blur(3px);
+
 }
