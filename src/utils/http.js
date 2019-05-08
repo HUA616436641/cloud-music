@@ -1,6 +1,7 @@
 import axios from 'axios'
 import qs from 'qs'
-
+// let baseURL = 'http://localhost:3000'
+let baseURL = 'http://192.168.1.104:3000'
 axios.interceptors.request.use(config => {
     // loading
     return config
@@ -43,7 +44,7 @@ export default {
     post (url, data) {
         return axios({
             method: 'post',
-            // baseURL: 'https://cnodejs.org/api/v1',
+            baseURL,
             url,
             data: qs.stringify(data),
             timeout: 10000,
@@ -64,7 +65,7 @@ export default {
     get (url, params) {
         return axios({
             method: 'get',
-            // baseURL: 'https://cnodejs.org/api/v1',
+            baseURL,
             url,
             params, // get 请求时带的参数
             timeout: 10000,

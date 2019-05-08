@@ -4,7 +4,7 @@ import './index.css';
 // import App from './App';
 import Router from './route';
 import * as serviceWorker from './serviceWorker';
-
+import 'amfe-flexible'
 ReactDOM.render(<Router />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change

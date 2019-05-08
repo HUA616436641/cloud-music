@@ -1,2 +1,3 @@
 import user from './user'
-export { user }
+import home from './home'
+export { user, home }
