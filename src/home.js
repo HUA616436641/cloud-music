@@ -13,10 +13,16 @@ export default class Home extends React.Component {
     }
     init () {
         let params = { type: 2 }
-        home.getBanner(params).then(res => {
-            this.setState({
-                data: res.banners
-            })
+        // home.getBanner(params).then(res => {
+        //     this.setState({
+        //         data: res.banners
+        //     })
+        // })
+        home.getRecommendResource().then(res => {
+            
+        })
+        home.getRecommendSongs().then(res => {
+
         })
     }
     render () {
@@ -84,7 +90,7 @@ export default class Home extends React.Component {
                         autoplay={false}
                         infinite
                         dotStyle={{ width: '0.2rem', height: '0.2rem', marginRight: '0.15rem' }}
-                        dotActiveStyle={{ width: '0.2rem', height: '0.2rem',backgroundColor:'red'}}
+                        dotActiveStyle={{ width: '0.2rem', height: '0.2rem', marginRight: '0.15rem', backgroundColor: 'red' }}
                         beforeChange={(from, to) => console.log(`slide from ${from} to ${to}`)}
                         afterChange={index => console.log('slide to', index)}
                     >
@@ -107,6 +113,39 @@ export default class Home extends React.Component {
                             </a>
                         ))}
                     </Carousel>
+                    <Flex className="menus">
+                        <Flex.Item>
+                            <div className="inner">
+                                <span className="iconfont icon-rili"></span>
+                            </div>
+                            每日推荐
+                        </Flex.Item>
+                        <Flex.Item>
+                            <div className="inner">
+                                <span className="iconfont icon-gedan"></span>
+                            </div>
+                            歌单
+                        </Flex.Item>
+                        <Flex.Item>
+                            <div className="inner">
+                                <span className="iconfont icon-paihang"></span>
+                            </div>
+                            排行榜
+                        </Flex.Item>
+                        <Flex.Item>
+                            <div className="inner">
+                                <span className="iconfont icon-diantai"></span>
+                            </div>
+                            电台
+                        </Flex.Item>
+                        <Flex.Item>
+                            <div className="inner">
+                                <span className="iconfont icon-zhibo"></span>
+                            </div>
+                            直播
+                        </Flex.Item>
+                    </Flex>
+
                 </div>
             </div>
         )
