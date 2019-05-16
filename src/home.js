@@ -8,22 +8,25 @@ export default class Home extends React.Component {
         super()
         this.init()
         this.state = {
-            data: []
+            banners: [],
+            recommendList: []
         }
     }
     init () {
         let params = { type: 2 }
-        // home.getBanner(params).then(res => {
-        //     this.setState({
-        //         data: res.banners
-        //     })
-        // })
+        home.getBanner(params).then(res => {
+            this.setState({
+                banners: res.banners
+            })
+        })
         home.getRecommendResource().then(res => {
-            
+            this.setState({
+                recommendList: res.recommend
+            })
         })
-        home.getRecommendSongs().then(res => {
+        // home.getRecommendSongs().then(res => {
 
-        })
+        // })
     }
     render () {
         return (
@@ -48,41 +51,6 @@ export default class Home extends React.Component {
                             <Flex.Item>视频</Flex.Item>
                         </Flex>
                     </NavBar>
-
-                    {/* <Carousel className="banner-carousel"
-                        frameOverflow="visible"
-                        cellSpacing={10}
-                        slideWidth={0.8}
-                        // autoplay
-                        infinite
-                        beforeChange={(from, to) => console.log(`slide from ${from} to ${to}`)}
-                        afterChange={index => this.setState({ slideIndex: index })}
-                    >
-                        {this.state.data.map((val, index) => (
-                            <a
-                                key={val}
-                                href="http://www.alipay.com"
-                                style={{
-                                    display: 'block',
-                                    position: 'relative',
-                                    top: this.state.slideIndex === index ? -10 : 0,
-                                    height: this.state.imgHeight,
-                                    boxShadow: '2px 1px 1px rgba(0, 0, 0, 0.2)',
-                                }}
-                            >
-                                <img
-                                    src={val.imageUrl}
-                                    alt=""
-                                    style={{ width: '100%', verticalAlign: 'top' }}
-                                    onLoad={() => {
-                                        // fire window resize event to change height
-                                        window.dispatchEvent(new Event('resize'));
-                                        this.setState({ imgHeight: 'auto' });
-                                    }}
-                                />
-                            </a>
-                        ))}
-                    </Carousel> */}
                     <Carousel className="banner-carousel"
                         // frameOverflow="hidden"
                         cellSpacing={10}
@@ -91,10 +59,10 @@ export default class Home extends React.Component {
                         infinite
                         dotStyle={{ width: '0.2rem', height: '0.2rem', marginRight: '0.15rem' }}
                         dotActiveStyle={{ width: '0.2rem', height: '0.2rem', marginRight: '0.15rem', backgroundColor: 'red' }}
-                        beforeChange={(from, to) => console.log(`slide from ${from} to ${to}`)}
-                        afterChange={index => console.log('slide to', index)}
+                        beforeChange={(from, to) => { }}
+                        afterChange={index => { }}
                     >
-                        {this.state.data.map(val => (
+                        {this.state.banners.map(val => (
                             <a
                                 key={val}
                                 href="http://www.alipay.com"
@@ -145,7 +113,19 @@ export default class Home extends React.Component {
                             直播
                         </Flex.Item>
                     </Flex>
-
+                    <div className="recommend-wrap">
+                        <div className="title">推荐歌单</div>
+                        <Flex className="recommends">
+                            {this.state.recommendList.map(item => (
+                                <Flex.Item className="recommend-item">
+                                    <div className="inner">
+                                        <img className="cover" alt={item.name} src={item.picUrl}/>
+                                    </div>
+                                    <div className="name">{ item.name }</div>
+                                </Flex.Item>
+                            ))}
+                        </Flex>
+                    </div>
                 </div>
             </div>
         )

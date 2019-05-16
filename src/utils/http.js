@@ -1,11 +1,10 @@
 import axios from 'axios'
 import qs from 'qs'
 // let baseURL = 'http://localhost:3000'
-let baseURL = 'http://192.168.1.104:3000'
+let baseURL = 'http://localhost:3000'
 axios.defaults.withCredentials = true
 axios.interceptors.request.use(config => {
-    // loading
-    
+    console.log(config)
     return config
 }, error => {
     return Promise.reject(error)
@@ -50,6 +49,7 @@ export default {
             url,
             data: qs.stringify(data),
             timeout: 10000,
+            withCredentials: true,
             headers: {
                 'X-Requested-With': 'XMLHttpRequest',
                 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
@@ -71,9 +71,7 @@ export default {
             url,
             params, // get 请求时带的参数
             timeout: 10000,
-            headers: {
-                'X-Requested-With': 'XMLHttpRequest'
-            }
+            withCredentials: true,
         }).then(
             (response) => {
                 return checkStatus(response)
@@ -83,6 +81,5 @@ export default {
                 return checkCode(res)
             }
         )
-        // return axios.get(`${baseURL}${url}`, { withCredentials: true })
     }
 }
