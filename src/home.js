@@ -121,7 +121,7 @@ export default class Home extends React.Component {
                                     <div className="inner">
                                         <img className="cover" alt={item.name} src={item.picUrl}/>
                                     </div>
-                                    <div className="name">{ item.name }</div>
+                                    <p className="name">{ item.name }</p>
                                 </Flex.Item>
                             ))}
                         </Flex>
