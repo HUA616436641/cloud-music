@@ -11,7 +11,6 @@ class BasicInputExample extends React.Component {
         let params = getFieldsValue()
         user.login(params).then(res => { 
             if (res.code === 200) {
-                console.log(this)
                 this.props.history.push('/home')
             }
         })

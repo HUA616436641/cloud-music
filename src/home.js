@@ -1,6 +1,6 @@
 import React from 'react';
-import { NavBar, InputItem, Button, Icon, Flex, Carousel } from 'antd-mobile';
-import { createForm } from 'rc-form';
+import { NavBar, Icon, Flex, Carousel } from 'antd-mobile';
+// import { createForm } from 'rc-form';
 import './home.scss';
 import { home } from './api'
 export default class Home extends React.Component {
@@ -24,13 +24,17 @@ export default class Home extends React.Component {
                 recommendList: res.recommend
             })
         })
-        // home.getRecommendSongs().then(res => {
-
-        // })
+    }
+    formatNum (num) {
+        return num < 10000 ? num : (num / 10000).toFixed(1) + '万'
+    }
+    onPlaylistClick(id) {
+        alert(id)
+        this.props.history.push('/playlist')
     }
     render () {
         return (
-            <div className="home-p">
+            <div className="home-p common-page">
                 <div className="content">
                     <NavBar
                         mode="light"
@@ -69,7 +73,7 @@ export default class Home extends React.Component {
                                 style={{ display: 'inline-block', width: '100%', height: this.state.imgHeight }}
                             >
                                 <img
-                                    src={val.imageUrl}
+                                    src={val.pic}
                                     alt=""
                                     style={{ width: '100%', verticalAlign: 'top' }}
                                     onLoad={() => {
@@ -116,12 +120,16 @@ export default class Home extends React.Component {
                     <div className="recommend-wrap">
                         <div className="title">推荐歌单</div>
                         <Flex className="recommends">
-                            {this.state.recommendList.map(item => (
-                                <Flex.Item className="recommend-item">
+                            {this.state.recommendList.slice(0,6).map(item => (
+                                <Flex.Item className="recommend-item" onClick={() => this.onPlaylistClick(item.id)}>
                                     <div className="inner">
-                                        <img className="cover" alt={item.name} src={item.picUrl}/>
+                                        <span className="play-num">
+                                            <span className="iconfont icon-play"></span>
+                                            {this.formatNum(item.playcount)}
+                                        </span>
+                                        <img className="cover" alt={item.name} src={item.picUrl} />
                                     </div>
-                                    <p className="name">{ item.name }</p>
+                                    <p className="name" style={{ display: '-webkit-box', 'WebkitLineClamp': 2, 'WebkitBoxOrient': 'vertical' }}>{item.name}</p>
                                 </Flex.Item>
                             ))}
                         </Flex>
