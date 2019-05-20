@@ -29,8 +29,7 @@ export default class Home extends React.Component {
         return num < 10000 ? num : (num / 10000).toFixed(1) + '万'
     }
     onPlaylistClick(id) {
-        alert(id)
-        this.props.history.push('/playlist')
+        this.props.history.push(`/playlist/${id}`)
     }
     render () {
         return (

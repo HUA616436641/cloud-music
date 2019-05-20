@@ -12,7 +12,7 @@ const BasicRoute = () => (
             <Route exact path="/" component={Login} />
             <Route exact path="/detail" component={Detail} />
             <Route exact path="/home" component={Home} />
-            <Route exact path="/playlist" component={Playlist} />
+            <Route exact path="/playlist/:id" component={Playlist} />
         </Switch>
     </BrowserRouter >
 );
