@@ -1,8 +1,8 @@
 import axios from 'axios'
 import qs from 'qs'
 // let baseURL = 'http://localhost:3000'
-let baseURL = 'http://192.168.10.115:3000'
-// let baseURL = 'http://192.168.1.104:3000'
+// let baseURL = 'http://192.168.10.115:3000'
+let baseURL = 'http://192.168.1.104:3000'
 axios.defaults.withCredentials = true
 axios.interceptors.request.use(config => {
     return config

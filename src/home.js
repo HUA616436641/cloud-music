@@ -36,26 +36,26 @@ export default class Home extends React.Component {
     render () {
         return (
             <div className="home-p common-page">
+                <NavBar
+                    mode="light"
+                    icon={<Icon type="ellipsis" />}
+                    onLeftClick={() => console.log('onLeftClick')}
+                    rightContent={[
+                        <Icon key="0" type="search" />,
+                    ]}
+                // rightContent={[
+                //     <Icon key="0" type="search" style={{ marginRight: '16px' }} />,
+                //     <Icon key="1" type="ellipsis" />,
+                // ]}
+                >
+                    <Flex>
+                        <Flex.Item>我的</Flex.Item>
+                        <Flex.Item className="active">发现</Flex.Item>
+                        <Flex.Item>朋友</Flex.Item>
+                        <Flex.Item>视频</Flex.Item>
+                    </Flex>
+                </NavBar>
                 <div className="content">
-                    <NavBar
-                        mode="light"
-                        icon={<Icon type="ellipsis" />}
-                        onLeftClick={() => console.log('onLeftClick')}
-                        rightContent={[
-                            <Icon key="0" type="search" />,
-                        ]}
-                    // rightContent={[
-                    //     <Icon key="0" type="search" style={{ marginRight: '16px' }} />,
-                    //     <Icon key="1" type="ellipsis" />,
-                    // ]}
-                    >
-                        <Flex>
-                            <Flex.Item>我的</Flex.Item>
-                            <Flex.Item className="active">发现</Flex.Item>
-                            <Flex.Item>朋友</Flex.Item>
-                            <Flex.Item>视频</Flex.Item>
-                        </Flex>
-                    </NavBar>
                     <Carousel className="banner-carousel"
                         // frameOverflow="hidden"
                         cellSpacing={10}
@@ -74,7 +74,7 @@ export default class Home extends React.Component {
                                 style={{ display: 'inline-block', width: '100%', height: this.state.imgHeight }}
                             >
                                 <img
-                                    src={val.pic}
+                                    src={val.imageUrl}
                                     alt=""
                                     style={{ width: '100%', verticalAlign: 'top' }}
                                     onLoad={() => {

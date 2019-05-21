@@ -45,11 +45,11 @@ export default class Home extends React.Component {
                 </NavBar>
                 <div className="content">
                     <div className="detail">
-                        <img src={detail.coverImgUrl} className="cover" />
+                        <img src={detail.coverImgUrl} className="cover" alt=""/>
                         <div className="info">
                             <div className="playlist-name">{detail.name}</div>
                             <div className="creator">
-                                <img src={detail.creator.avatarUrl} className="avatar" />
+                                <img src={detail.creator.avatarUrl} className="avatar" alt=""/>
                                 <span className="name">{detail.creator.nickname}></span>
                             </div>
                             <div className="desc" style={{ display: '-webkit-box', 'WebkitBoxOrient': 'vertical' }}>{detail.description}</div>
@@ -64,7 +64,7 @@ export default class Home extends React.Component {
                                     <div className="author">{item.ar[0].name}-{item.al.name}</div>
                                 </div>
                                 <div className="rt">
-                                    <span className="iconfont icon-play1"></span>
+                                    <span className="iconfont icon-play1" style={{fontSize: '0.6rem'}}></span>
                                     <span className="iconfont icon-more"></span>
                                 </div>
                             </div>

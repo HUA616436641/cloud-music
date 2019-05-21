@@ -63,6 +63,7 @@
             text-align: center;
             font-size: 0.5rem;
             color: #c7caca;
+            flex: 0 0 auto;
         }
         // .ellipsis{
         //     white-space: nowrap;
@@ -71,9 +72,9 @@
         // }
 
         .ct{
-            width: 70%;
-            flex: 0 0 auto;
+            flex: 1 1 auto;
             padding-right: 0.4rem;
+            @include ellipsis;
             .name{
                 font-size: 0.4rem;
                 color: #eee;
@@ -86,10 +87,15 @@
                 @include ellipsis;
             }
         }
-        .rt .iconfont{
-            margin-left: 0.3rem;
-            font-size: 0.5rem;
-            color: #c1c2c1;
-        }
+        .rt{
+            width: 2rem;
+            flex: 0 0 auto;
+            padding-right: 0.1rem;
+            .iconfont{
+                margin-left: 0.3rem;
+                font-size: 0.5rem;
+                color: #c1c2c1;
+            }
+        } 
     }
 }
