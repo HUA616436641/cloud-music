@@ -38,7 +38,22 @@ code {
     }
 }
 .common-page{
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
   position: absolute;
   width: 100%;
   height: 100%;
+  .am-navbar{
+    flex: 0 0 auto;
+  }
+  .content{
+    background-color: rgba(0,0,0,.4);
+    overflow: auto;
+  }
+}
+@mixin ellipsis{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

@@ -15,11 +15,13 @@ export default class Home extends React.Component {
     init () {
         let params = { type: 2 }
         home.getBanner(params).then(res => {
+            if (res.code !== 200) return
             this.setState({
                 banners: res.banners
             })
         })
         home.getRecommendResource().then(res => {
+            if (res.code !== 200) return
             this.setState({
                 recommendList: res.recommend
             })
@@ -28,7 +30,7 @@ export default class Home extends React.Component {
     formatNum (num) {
         return num < 10000 ? num : (num / 10000).toFixed(1) + '万'
     }
-    onPlaylistClick(id) {
+    onPlaylistClick (id) {
         this.props.history.push(`/playlist/${id}`)
     }
     render () {
@@ -119,8 +121,8 @@ export default class Home extends React.Component {
                     <div className="recommend-wrap">
                         <div className="title">推荐歌单</div>
                         <Flex className="recommends">
-                            {this.state.recommendList.slice(0,6).map(item => (
-                                <Flex.Item className="recommend-item" onClick={() => this.onPlaylistClick(item.id)}>
+                            {this.state.recommendList.slice(0, 6).map(item => (
+                                <Flex.Item className="recommend-item" onClick={() => this.onPlaylistClick(item.id)} key={item.name}>
                                     <div className="inner">
                                         <span className="play-num">
                                             <span className="iconfont icon-play"></span>

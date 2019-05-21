@@ -19,7 +19,7 @@ class BasicInputExample extends React.Component {
     render () {
         const { getFieldProps } = this.props.form;
         return (
-            <div>
+            <div className="common-page">
                 <NavBar
                     mode="light"
                     // icon={<Icon type="left" />}
