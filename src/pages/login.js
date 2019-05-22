@@ -2,7 +2,7 @@ import React from 'react';
 import { NavBar, InputItem, Button } from 'antd-mobile';
 import { createForm } from 'rc-form';
 import './login.css';
-import { user } from './api'
+import { user } from '../api'
 import { withRouter } from 'react-router'; 
 
 class BasicInputExample extends React.Component {

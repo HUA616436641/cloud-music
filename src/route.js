@@ -1,10 +1,10 @@
 import React from 'react';
 import { BrowserRouter , Route, Switch } from 'react-router-dom';
-import Login from './login';
-import Detail from './detail';
-import Home from './home';
-import Playlist from './playlist.jsx';
-
+import Login from './pages/login';
+import Detail from './pages/detail';
+import Home from './pages/home';
+import Playlist from './pages/playlist.jsx';
+import Play from './pages/play.jsx';
 
 const BasicRoute = () => (
     <BrowserRouter >
@@ -13,6 +13,7 @@ const BasicRoute = () => (
             <Route exact path="/detail" component={Detail} />
             <Route exact path="/home" component={Home} />
             <Route exact path="/playlist/:id" component={Playlist} />
+            <Route exact path="/play/:id" component={Play} />
         </Switch>
     </BrowserRouter >
 );

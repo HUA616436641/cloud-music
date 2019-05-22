@@ -2,7 +2,7 @@ import React from 'react';
 import { NavBar, Icon, Flex, Carousel } from 'antd-mobile';
 // import { createForm } from 'rc-form';
 import './home.scss';
-import { home } from './api'
+import { home } from '../api'
 export default class Home extends React.Component {
     constructor() {
         super()
@@ -74,7 +74,7 @@ export default class Home extends React.Component {
                                 style={{ display: 'inline-block', width: '100%', height: this.state.imgHeight }}
                             >
                                 <img
-                                    src={val.imageUrl}
+                                    src={val.imageUrl || val.pic}
                                     alt=""
                                     style={{ width: '100%', verticalAlign: 'top' }}
                                     onLoad={() => {

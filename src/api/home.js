@@ -8,4 +8,10 @@ export default {
     getRecommendSongs: params => http.get(`/recommend/songs`, params),
     // 歌单详情
     getPlayListDetail: params => http.get(`/playlist/detail`, params),
+    // 歌曲详情
+    getSongDetail: params => http.get(`/song/detail`, params),
+    // 歌曲url
+    getSongUrl: params => http.get(`/song/url`, params),
+    // 歌词
+    getLyric: params => http.get(`/lyric`, params),
 }
