@@ -1,5 +1,7 @@
 import axios from 'axios'
 import qs from 'qs'
+import { Toast } from 'antd-mobile';
+
 // let baseURL = 'http://localhost:3000'
 let baseURL = 'http://192.168.10.115:3000'
 // let baseURL = 'http://192.168.1.104:3000'
@@ -11,11 +13,14 @@ axios.interceptors.request.use(config => {
 })
 
 axios.interceptors.response.use(response => {
-    // console.log(response)
     return response.data
 }, error => {
-    // console.log(response)
-    return Promise.resolve(error.response)
+    if (error.code === 'ECONNABORTED' && error.message.indexOf('timeout') !== -1) {
+        Toast.offline('请求超时', 1);
+        return
+    }
+    Toast.fail(error.message, 1);
+    return Promise.reject(error)
 })
 
 // function checkStatus (response) {

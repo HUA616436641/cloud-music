@@ -51,6 +51,7 @@ code {
   .content{
     background-color: rgba(0,0,0,.4);
     overflow: auto;
+    flex: 1 1 auto;
   }
 }
 @mixin ellipsis{
