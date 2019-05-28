@@ -1,6 +1,6 @@
 import React from 'react';
-import { NavBar, Icon, Slider, Button } from 'antd-mobile';
-import './play.scss';
+import { NavBar, Icon, Slider } from 'antd-mobile';
+import css from './play.module.scss';
 import { home } from '@/api'
 import BScroll from 'better-scroll'
 let lrcScroll
@@ -100,7 +100,6 @@ export default class Play extends React.Component {
         }
     }
     onTimeChange (val) {
-        let state = this.state
         // 设置播放时间
         this.setState({
             draging: true,

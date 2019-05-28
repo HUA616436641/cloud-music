@@ -1,7 +1,8 @@
 import React from 'react';
 import { NavBar, InputItem, Button } from 'antd-mobile';
 import { createForm } from 'rc-form';
-import './login.css';
+
+import styles from './login.module.scss';
 import { user } from '../api'
 import { withRouter } from 'react-router'; 
 
@@ -19,7 +20,7 @@ class BasicInputExample extends React.Component {
     render () {
         const { getFieldProps } = this.props.form;
         return (
-            <div className="common-page">
+            <div className="common-page mobile">
                 <NavBar
                     mode="light"
                     // icon={<Icon type="left" />}
@@ -34,7 +35,7 @@ class BasicInputExample extends React.Component {
                     clear
                     placeholder="请输入手机号"
                     ref={el => this.inputRef = el}
-                    className="mobile"
+                    className={styles.mobile}
                 >+86</InputItem>
                 <InputItem
                     {...getFieldProps('password', { initialValue: 'cf87595895' })}

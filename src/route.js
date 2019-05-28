@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter , Route, Switch } from 'react-router-dom';
-import Login from './pages/login';
-import Detail from './pages/detail';
-import Home from './pages/home';
+import Login from './pages/login.jsx';
+import Detail from './pages/detail.jsx';
+import Home from './pages/home.jsx';
 import Playlist from './pages/playlist.jsx';
 import Play from './pages/play.jsx';
 

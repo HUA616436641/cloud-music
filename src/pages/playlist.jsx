@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavBar, Icon } from 'antd-mobile';
-import './playlist.scss';
+import './playlist.module.scss';
 import { home } from '../api'
 export default class Playlist extends React.Component {
     constructor() {

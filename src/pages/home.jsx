@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavBar, Icon, Flex, Carousel } from 'antd-mobile';
 // import { createForm } from 'rc-form';
-import './home.scss';
+import style from './home.module.scss';
 import { home } from '../api'
 export default class Home extends React.Component {
     constructor() {
@@ -35,8 +35,9 @@ export default class Home extends React.Component {
     }
     render () {
         return (
-            <div className="home-p common-page">
+            <div className="common-page">
                 <NavBar
+                    className={style.amNavbar}
                     mode="light"
                     icon={<Icon type="ellipsis" />}
                     onLeftClick={() => console.log('onLeftClick')}
@@ -48,6 +49,7 @@ export default class Home extends React.Component {
                 //     <Icon key="1" type="ellipsis" />,
                 // ]}
                 >
+                    <div className="am-flexbox-item"></div>
                     <Flex>
                         <Flex.Item>我的</Flex.Item>
                         <Flex.Item className="active">发现</Flex.Item>
