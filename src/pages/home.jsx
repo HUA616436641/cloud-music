@@ -37,7 +37,7 @@ export default class Home extends React.Component {
         return (
             <div className="common-page">
                 <NavBar
-                    className={style.amNavbar}
+                    styleName='am-navbar'
                     mode="light"
                     icon={<Icon type="ellipsis" />}
                     onLeftClick={() => console.log('onLeftClick')}
@@ -49,16 +49,15 @@ export default class Home extends React.Component {
                 //     <Icon key="1" type="ellipsis" />,
                 // ]}
                 >
-                    <div className="am-flexbox-item"></div>
                     <Flex>
                         <Flex.Item>我的</Flex.Item>
-                        <Flex.Item className="active">发现</Flex.Item>
+                        <Flex.Item styleName="active">发现</Flex.Item>
                         <Flex.Item>朋友</Flex.Item>
                         <Flex.Item>视频</Flex.Item>
                     </Flex>
                 </NavBar>
-                <div className="content">
-                    <Carousel className="banner-carousel"
+                <div>
+                    <Carousel styleName="banner-carousel"
                         // frameOverflow="hidden"
                         cellSpacing={10}
                         slideWidth={0.8}
@@ -88,51 +87,51 @@ export default class Home extends React.Component {
                             </a>
                         ))}
                     </Carousel>
-                    <Flex className="menus">
+                    <Flex styleName="menus">
                         <Flex.Item>
-                            <div className="inner">
+                            <div styleName="inner">
                                 <span className="iconfont icon-rili"></span>
                             </div>
                             每日推荐
                         </Flex.Item>
                         <Flex.Item>
-                            <div className="inner">
+                            <div styleName="inner">
                                 <span className="iconfont icon-gedan"></span>
                             </div>
                             歌单
                         </Flex.Item>
                         <Flex.Item>
-                            <div className="inner">
+                            <div styleName="inner">
                                 <span className="iconfont icon-paihang"></span>
                             </div>
                             排行榜
                         </Flex.Item>
                         <Flex.Item>
-                            <div className="inner">
+                            <div styleName="inner">
                                 <span className="iconfont icon-diantai"></span>
                             </div>
                             电台
                         </Flex.Item>
                         <Flex.Item>
-                            <div className="inner">
+                            <div styleName="inner">
                                 <span className="iconfont icon-zhibo"></span>
                             </div>
                             直播
                         </Flex.Item>
                     </Flex>
-                    <div className="recommend-wrap">
-                        <div className="title">推荐歌单</div>
-                        <Flex className="recommends">
-                            {this.state.recommendList.slice(0, 6).map(item => (
-                                <Flex.Item className="recommend-item" onClick={() => this.onPlaylistClick(item.id)} key={item.name}>
-                                    <div className="inner">
-                                        <span className="play-num">
+                    <div styleName="recommend-wrap">
+                        <div styleName="title">推荐歌单</div>
+                        <Flex styleName="recommends">
+                            {this.state.recommendList.slice(0).map(item => (
+                                <Flex.Item styleName="recommend-item" onClick={() => this.onPlaylistClick(item.id)} key={item.name}>
+                                    <div styleName="inner">
+                                        <span styleName="play-num">
                                             <span className="iconfont icon-play"></span>
                                             {this.formatNum(item.playcount)}
                                         </span>
-                                        <img className="cover" alt={item.name} src={item.picUrl} />
+                                        <img styleName="cover" alt={item.name} src={item.picUrl} />
                                     </div>
-                                    <p className="name" style={{ display: '-webkit-box', 'WebkitLineClamp': 2, 'WebkitBoxOrient': 'vertical' }}>{item.name}</p>
+                                    <p styleName="name" style={{ display: '-webkit-box', 'WebkitLineClamp': 2, 'WebkitBoxOrient': 'vertical' }}>{item.name}</p>
                                 </Flex.Item>
                             ))}
                         </Flex>

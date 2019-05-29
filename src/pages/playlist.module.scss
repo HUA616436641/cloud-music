@@ -1,95 +1,93 @@
 @import '../styles/mixin';
 @import "~bourbon/core/_bourbon.scss";
-.playlist-p{
-    .content{
-        padding: 0.35rem;
-    }
-    .am-navbar {
-        position: relative;
-        height: 1.5rem;
-        z-index: 1;
-        background-color: rgba(255, 255, 255, 0.08);
+:global(.content){
+    padding: 0.35rem;
+}
+:global(.am-navbar) {
+    position: relative;
+    height: 1.5rem;
+    z-index: 1;
+    background-color: rgba(255, 255, 255, 0.08);
+    color: #fff;
+}
+.track-item{
+    display: flex;
+}
+.detail{
+    display: flex;
+    align-items: center;
+}
+.cover{
+    @include size(3.5rem);
+    border-radius: 0.15rem;
+    flex: 0 0 auto;
+}
+.info{
+    padding-left: 0.5rem;
+    .playlist-name{
         color: #fff;
+        font-size: 0.45rem;
+        line-height: 1.5;
     }
-    .track-item{
-        display: flex;
-    }
-    .detail{
+    .creator{
         display: flex;
         align-items: center;
+        margin: 0.3rem 0;
+        .avatar{
+            width: 0.8rem;
+            height: 0.8rem;
+            border-radius: 50%;
+            margin-right: 0.2rem;
+        }
+        .name{
+            color: #ddd6d6;
+            font-size: 0.35rem;
+        }
     }
-    .cover{
-        @include size(3.5rem);
-        border-radius: 0.15rem;
+    .desc{
+        line-height: 1.6;
+        font-size: 0.3rem;
+        color: #bababb;
+        overflow: hidden;
+        -webkit-line-clamp:2;
+    }
+}
+.song{
+    display: flex;
+    align-items: center;
+    padding: 0.3rem 0;
+    .lt{
+        width: 1rem;
+        padding-right: 0.2rem;
+        text-align: center;
+        font-size: 0.5rem;
+        color: #c7caca;
         flex: 0 0 auto;
     }
-    .info{
-        padding-left: 0.5rem;
-        .playlist-name{
-            color: #fff;
-            font-size: 0.45rem;
-            line-height: 1.5;
-        }
-        .creator{
-            display: flex;
-            align-items: center;
-            margin: 0.3rem 0;
-            .avatar{
-                width: 0.8rem;
-                height: 0.8rem;
-                border-radius: 50%;
-                margin-right: 0.2rem;
-            }
-            .name{
-                color: #ddd6d6;
-                font-size: 0.35rem;
-            }
-        }
-        .desc{
-            line-height: 1.6;
-            font-size: 0.3rem;
-            color: #bababb;
-            overflow: hidden;
-            -webkit-line-clamp:2;
-        }
-    }
-    .song{
-        display: flex;
-        align-items: center;
-        padding: 0.3rem 0;
-        .lt{
-            width: 1rem;
-            padding-right: 0.2rem;
-            text-align: center;
-            font-size: 0.5rem;
-            color: #c7caca;
-            flex: 0 0 auto;
-        }
 
-        .ct{
-            flex: 1 1 auto;
-            padding-right: 0.4rem;
-            @include ellipsis;
-            .name{
-                font-size: 0.4rem;
-                color: #eee;
-            }
-            .author{
-                font-size: 0.3rem;
-                color: #c7caca;
-                margin-top: 0.2rem;
-                @include ellipsis;
-            }
+    .ct{
+        flex: 1 1 auto;
+        padding-right: 0.4rem;
+        @include ellipsis;
+        .name{
+            font-size: 0.4rem;
+            color: #eee;
         }
-        .rt{
-            width: 2rem;
-            flex: 0 0 auto;
-            padding-right: 0.1rem;
-            .iconfont{
-                margin-left: 0.3rem;
-                font-size: 0.5rem;
-                color: #c1c2c1;
-            }
-        } 
+        .author{
+            font-size: 0.3rem;
+            color: #c7caca;
+            margin-top: 0.2rem;
+            @include ellipsis;
+        }
     }
+    .rt{
+        width: 2rem;
+        flex: 0 0 auto;
+        padding-right: 0.1rem;
+        :global(.iconfont){
+            margin-left: 0.3rem;
+            font-size: 0.5rem;
+            color: #c1c2c1;
+        }
+    } 
 }

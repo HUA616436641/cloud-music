@@ -74,7 +74,7 @@
     "workbox-webpack-plugin": "4.2.0"
   },
   "scripts": {
-    "start": "node scripts/start.js",
+    "start": "node scripts/start.js --open=false",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js"
   },
