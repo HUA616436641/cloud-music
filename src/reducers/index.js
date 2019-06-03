@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
-import todos from './todos'
+import play from './play'
 
 export default combineReducers({
-  todos
+  play
 })

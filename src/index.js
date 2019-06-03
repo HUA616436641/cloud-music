@@ -1,23 +1,30 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { createStore } from 'redux'
-import { Provider } from 'react-redux'
+import React from "react"
+import ReactDOM from "react-dom"
+import { createStore, applyMiddleware } from "redux"
+import { Provider } from "react-redux"
+import thunk from "redux-thunk"
 // import App from './App';
-import 'amfe-flexible'
-import * as serviceWorker from './serviceWorker';
-import './styles/common.scss';
-import Router from './route';
-import rootReducer from './reducers'
+import "amfe-flexible"
+import * as serviceWorker from "./serviceWorker"
+import "./styles/common.scss"
+import Router from "./route"
+import rootReducer from "./reducers"
 // import './assets/font/iconfont.css'
 
-const store = createStore(rootReducer)
+const { composeWithDevTools } = require("redux-devtools-extension")
+const middleware = [thunk]
+const store = createStore(
+  rootReducer,
+  composeWithDevTools(applyMiddleware(...middleware))
+)
+
 ReactDOM.render(
-    <Provider store={store}>
-        <Router />
-    </Provider>,
-    document.getElementById('root')
+  <Provider store={store}>
+    <Router />
+  </Provider>,
+  document.getElementById("root")
 )
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+serviceWorker.unregister()

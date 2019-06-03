@@ -1,10 +1,26 @@
-import React from 'react';
-
+import React from "react"
+import "./MiniPlayer.module.scss"
 export default class MiniPlayer extends React.Component {
-  render () {
+  onCanPlayThrough = () => {
+    let { togglePlayStatus } = this.props
+    setTimeout(() => {
+      document.querySelector(".player").play()
+      togglePlayStatus(true)
+    }, 1000)
+  }
+  render() {
+    let { songUrl } = this.props.playDetail
+    let { onTimeUpdate, togglePlayStatus } = this.props
     return (
-      <div>
-        回到home
+      <div styleName="mini-player">
+        <audio
+          src={songUrl}
+          controls
+          styleName="player"
+          className="player"
+          onTimeUpdate={onTimeUpdate}
+          onCanPlayThrough={this.onCanPlayThrough}
+        />
       </div>
     )
   }

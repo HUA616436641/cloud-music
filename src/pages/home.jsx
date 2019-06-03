@@ -1,7 +1,6 @@
-import React from 'react';
-import { NavBar, Icon, Flex, Carousel } from 'antd-mobile';
-// import { createForm } from 'rc-form';
-import style from './home.module.scss';
+import React from 'react'
+import { NavBar, Icon, Flex, Carousel } from 'antd-mobile'
+import './home.module.scss'
 import { home } from '../api'
 export default class Home extends React.Component {
   constructor() {

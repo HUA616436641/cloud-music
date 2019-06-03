@@ -1,18 +1,19 @@
 import { connect } from 'react-redux'
-import { playNext, playPrev  } from '../actions'
-import TodoList from '../components/TodoList'
+import { playNext, playPrev, togglePlayStatus } from "../actions"
+import MiniPlayer from '../components/MiniPlayer'
 
 const mapStateToProps = state => ({
-  currentPlay: state.currentPlay,
-  playList: state.playList
+  playDetail: state.play,
+  playlist: state.playlist
 })
 
 const mapDispatchToProps = dispatch => ({
-  playNext: () => dispatch(playNext()),
-  playPrev: () => dispatch(playPrev())
+  togglePlayStatus: playing => dispatch(togglePlayStatus(playing)),
+  onPlayNext: () => dispatch(playNext()),
+  onPlayPrev: () => dispatch(playPrev())
 })
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(TodoList)
+)(MiniPlayer)
