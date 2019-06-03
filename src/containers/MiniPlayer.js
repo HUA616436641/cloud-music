@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { playNext, playPrev, togglePlayStatus } from "../actions"
+import { playNext, playPrev, togglePlayStatus, timeUpdate } from "../actions"
 import MiniPlayer from '../components/MiniPlayer'
 
 const mapStateToProps = state => ({
@@ -7,8 +7,12 @@ const mapStateToProps = state => ({
   playlist: state.playlist
 })
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch, getState) => ({
   togglePlayStatus: playing => dispatch(togglePlayStatus(playing)),
+  onTimeUpdate: () => {
+    console.log(getState())
+    !getState().play.draging && dispatch(timeUpdate())
+  },
   onPlayNext: () => dispatch(playNext()),
   onPlayPrev: () => dispatch(playPrev())
 })

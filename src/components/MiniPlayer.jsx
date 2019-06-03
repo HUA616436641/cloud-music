@@ -6,11 +6,11 @@ export default class MiniPlayer extends React.Component {
     setTimeout(() => {
       document.querySelector(".player").play()
       togglePlayStatus(true)
-    }, 1000)
+    }, 2000)
   }
   render() {
     let { songUrl } = this.props.playDetail
-    let { onTimeUpdate, togglePlayStatus } = this.props
+    let { onTimeUpdate } = this.props
     return (
       <div styleName="mini-player">
         <audio

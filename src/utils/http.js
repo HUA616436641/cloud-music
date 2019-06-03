@@ -3,8 +3,8 @@ import qs from 'qs'
 import { Toast } from 'antd-mobile';
 
 // let baseURL = 'http://localhost:9999'
-let baseURL = 'http://192.168.10.115:9999'
-// let baseURL = 'http://192.168.1.100:9999'
+// let baseURL = 'http://192.168.10.115:9999'
+let baseURL = 'http://192.168.1.104:9999'
 axios.defaults.withCredentials = true
 axios.interceptors.request.use(config => {
     return config

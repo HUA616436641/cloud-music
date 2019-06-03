@@ -4,21 +4,27 @@ let playInfo = {
   cover: "",
   curTimeStamp: 0,
   duration: 0,
-  playing: false
+  playing: false,
+  draging: false
 }
 export const play = (state = playInfo, action) => {
   let { type, ...rest } = action
-  console.log(type)
   switch (type) {
     case "START":
       return {
         ...state,
-        ...rest.song
+        ...rest.song,
+        playing: true
       }
     case "TOGGLE_PLAY_STATUS":
       return {
         ...state,
-        ...rest.playing
+        ...rest
+      }
+    case "TIME_UPDATE":
+      return {
+        ...state,
+        ...rest
       }
     case "NEXT":
       return state

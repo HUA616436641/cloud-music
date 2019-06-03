@@ -8,19 +8,19 @@ import "./play.module.scss"
 let lrcScroll
 class Play extends React.Component {
   state = {
-    songUrl: "",
-    cover: "",
+    // songUrl: "",
+    // cover: "",
     lrcArr: undefined,
-    curTimeStamp: 0,
-    duration: 0,
+    // curTimeStamp: 0,
+    // duration: 0,
     // 是否拖动状态
-    draging: false,
+    // draging: false,
     // 是否播放状态
-    playing: false,
+    // playing: false,
     showCover: true,
-    curLrc: undefined
+    curLrc: undefined,
   }
-  componentWillMount() {
+  componentWillMount () {
     let { getSongDetail } = this.props
     let id = this.props.match.params.id
     if (!id) return
@@ -36,7 +36,7 @@ class Play extends React.Component {
     getSongDetail(id)
     // })
   }
-  componentDidMount() {
+  componentDidMount () {
     let { startPlay } = this.props
     let id = this.props.match.params.id
     // home.getLyric({ id }).then(res => {
@@ -58,27 +58,27 @@ class Play extends React.Component {
     let wrapper = document.querySelector(".lrc-wrap")
     lrcScroll = new BScroll(wrapper, {})
   }
-  onCanPlayThrough = () => {
-    setTimeout(() => {
-      document.querySelector(".player").play()
-      this.setState({
-        playing: true
-      })
-    }, 500)
-  }
-  formatToTime(timeStamp) {
+  // onCanPlayThrough = () => {
+  //   setTimeout(() => {
+  //     document.querySelector(".player").play()
+  //     this.setState({
+  //       playing: true
+  //     })
+  //   }, 500)
+  // }
+  formatToTime (timeStamp) {
     let m = Math.floor(timeStamp / 60)
     m < 10 && (m = "0" + m)
     let s = Math.floor(timeStamp % 60)
     s < 10 && (s = "0" + s)
     return `${m}:${s}`
   }
-  formatToNum(time) {
+  formatToNum (time) {
     let m = parseInt(time.split(":")[0])
     let s = parseInt(time.split(":")[1])
     return 60 * m + s
   }
-  parseLrc(text) {
+  parseLrc (text) {
     let res = text.split("\n")
     let timeReg = /^\[(\d{2}):(\d{2})\.(\d*)\]/
     res = res.map(line => {
@@ -117,14 +117,14 @@ class Play extends React.Component {
     }
     this.setState(obj)
   }
-  onTimeChange(val) {
+  onTimeChange (val) {
     // 设置播放时间
     this.setState({
       draging: true,
       curTimeStamp: val
     })
   }
-  onAfterTimeChange(val) {
+  onAfterTimeChange (val) {
     let { lrcArr } = this.state
     this.setState({
       curTimeStamp: val
@@ -141,12 +141,12 @@ class Play extends React.Component {
       idx >= 0 && this.scrollLrc(idx)
     }
   }
-  scrollLrc(idx) {
+  scrollLrc (idx) {
     let el = document.querySelector(".lrc-list")
     let lrcEl = el.querySelectorAll(".lrc-item")[idx]
     lrcScroll.scrollToElement(lrcEl, 300, 0, -150)
   }
-  togglePlay() {
+  togglePlay () {
     let player = document.querySelector(".player")
     let obj = {}
     // console.log(player)
@@ -164,18 +164,18 @@ class Play extends React.Component {
       showCover: !this.state.showCover
     })
   }
-  render() {
-    let playDedail = this.props
+  render () {
     let {
       lrcArr,
       showCover,
+      curLrc,
+    } = this.state
+    let {
       cover,
       playing,
-      curLrc,
       duration,
-      curTimeStamp,
-      songUrl
-    } = this.state
+      curTimeStamp
+    } = this.props.playDetail
     // let detail = this.state.detail
     let lrcList
     if (lrcArr && lrcArr.length > 0) {
@@ -198,7 +198,6 @@ class Play extends React.Component {
     }
     return (
       <div className="content" styleName="content">
-        {JSON.stringify(playDedail.duration)}
         <div
           styleName="cover-wrap"
           style={{ display: showCover ? "block" : "none" }}

@@ -22,7 +22,6 @@ export const getSongDetail = id => async (dispatch, getState) => {
   // let res1 = await getSongUrl()
   // let res2 = await getSongDetail()
   let res = await Promise.all([getSongUrl(), getSongDetail()])
-  console.log(res)
   let song = {
     songUrl: res[0].data[0].url,
     duration: res[1].songs[0].dt,
@@ -33,7 +32,7 @@ export const getSongDetail = id => async (dispatch, getState) => {
   //     duration: res.songs[0].dt,
   //     cover: res.songs[0].al.picUrl
   //   }
-    return dispatch(startPlay(song))
+  return dispatch(startPlay(song))
   // })
 }
 
@@ -62,3 +61,8 @@ export const togglePlayStatus = playing => ({
   type: "TOGGLE_PLAY_STATUS",
   playing
 })
+export const timeUpdate = () => ({
+  type: "TIME_UPDATE",
+  curTimeStamp: document.querySelector(".player").currentTime
+})
+

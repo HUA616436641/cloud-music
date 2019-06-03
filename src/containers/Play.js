@@ -10,7 +10,7 @@ import Play from "../components/Play"
 
 const mapStateToProps = state => {
   return {
-    playDedail: state.play
+    playDetail: state.play
   }
 }
 
