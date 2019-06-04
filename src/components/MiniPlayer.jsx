@@ -2,14 +2,14 @@ import React from "react"
 import "./MiniPlayer.module.scss"
 export default class MiniPlayer extends React.Component {
   onCanPlayThrough = () => {
-    let { togglePlayStatus } = this.props
+    let { togglePlay } = this.props
     setTimeout(() => {
       document.querySelector(".player").play()
-      togglePlayStatus(true)
-    }, 2000)
+      togglePlay(true)
+    }, 5000)
   }
   render() {
-    let { songUrl } = this.props.playDetail
+    let { songUrl, draging } = this.props.playDetail
     let { onTimeUpdate } = this.props
     return (
       <div styleName="mini-player">
@@ -18,7 +18,9 @@ export default class MiniPlayer extends React.Component {
           controls
           styleName="player"
           className="player"
-          onTimeUpdate={onTimeUpdate}
+          onTimeUpdate={() => {
+            !draging && onTimeUpdate()
+          }}
           onCanPlayThrough={this.onCanPlayThrough}
         />
       </div>

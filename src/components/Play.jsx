@@ -18,9 +18,9 @@ class Play extends React.Component {
     // 是否播放状态
     // playing: false,
     showCover: true,
-    curLrc: undefined,
+    curLrc: undefined
   }
-  componentWillMount () {
+  componentWillMount() {
     let { getSongDetail } = this.props
     let id = this.props.match.params.id
     if (!id) return
@@ -36,19 +36,18 @@ class Play extends React.Component {
     getSongDetail(id)
     // })
   }
-  componentDidMount () {
-    let { startPlay } = this.props
+  componentDidMount() {
     let id = this.props.match.params.id
-    // home.getLyric({ id }).then(res => {
-    //   let obj = {}
-    //   if (res.lrc && res.lrc.lyric) {
-    //     let lrcArr = this.parseLrc(res.lrc.lyric)
-    //     obj.lrcArr = lrcArr
-    //   } else {
-    //     obj.lrcArr = []
-    //   }
-    //   this.setState(obj)
-    // })
+    home.getLyric({ id }).then(res => {
+      let obj = {}
+      if (res.lrc && res.lrc.lyric) {
+        let lrcArr = this.parseLrc(res.lrc.lyric)
+        obj.lrcArr = lrcArr
+      } else {
+        obj.lrcArr = []
+      }
+      this.setState(obj)
+    })
     // home.getSongUrl({ id }).then(res => {
     //   // this.setState({
     //   //   songUrl: res.data[0].url
@@ -66,19 +65,19 @@ class Play extends React.Component {
   //     })
   //   }, 500)
   // }
-  formatToTime (timeStamp) {
+  formatToTime(timeStamp) {
     let m = Math.floor(timeStamp / 60)
     m < 10 && (m = "0" + m)
     let s = Math.floor(timeStamp % 60)
     s < 10 && (s = "0" + s)
     return `${m}:${s}`
   }
-  formatToNum (time) {
+  formatToNum(time) {
     let m = parseInt(time.split(":")[0])
     let s = parseInt(time.split(":")[1])
     return 60 * m + s
   }
-  parseLrc (text) {
+  parseLrc(text) {
     let res = text.split("\n")
     let timeReg = /^\[(\d{2}):(\d{2})\.(\d*)\]/
     res = res.map(line => {
@@ -117,65 +116,87 @@ class Play extends React.Component {
     }
     this.setState(obj)
   }
-  onTimeChange (val) {
-    // 设置播放时间
-    this.setState({
-      draging: true,
-      curTimeStamp: val
-    })
-  }
-  onAfterTimeChange (val) {
-    let { lrcArr } = this.state
-    this.setState({
-      curTimeStamp: val
-    })
+  // onTimeChange(val) {
+  //   // 设置播放时间
+  //   this.setState({
+  //     draging: true,
+  //     curTimeStamp: val
+  //   })
+  // }
+  // onAfterTimeChange(val) {
+  //   let { lrcArr } = this.state
+  //   this.setState({
+  //     curTimeStamp: val
+  //   })
+  //   document.querySelector(".player").currentTime = val
+  //   this.setState({
+  //     draging: false
+  //   })
+  //   // 滚动歌词
+  //   if (lrcArr) {
+  //     let idx = lrcArr.findIndex(
+  //       line => line.timeStamp === this.formatToTime(val)
+  //     )
+  //     idx >= 0 && this.scrollLrc(idx)
+  //   }
+  // }
+  onAfterTimeChange(val) {
+    let { onAfterTimeChange } = this.props
+    onAfterTimeChange(val)
     document.querySelector(".player").currentTime = val
-    this.setState({
-      draging: false
-    })
-    // 滚动歌词
-    if (lrcArr) {
-      let idx = lrcArr.findIndex(
-        line => line.timeStamp === this.formatToTime(val)
-      )
-      idx >= 0 && this.scrollLrc(idx)
-    }
   }
-  scrollLrc (idx) {
+  scrollLrc(idx) {
     let el = document.querySelector(".lrc-list")
     let lrcEl = el.querySelectorAll(".lrc-item")[idx]
     lrcScroll.scrollToElement(lrcEl, 300, 0, -150)
   }
-  togglePlay () {
+  togglePlay() {
+    let { onTogglePlay } = this.props
     let player = document.querySelector(".player")
-    let obj = {}
+    let val
     // console.log(player)
     if (player.paused) {
       player.play()
-      obj.playing = true
+      val = true
     } else {
       player.pause()
-      obj.playing = false
+      val = false
     }
-    this.setState(obj)
+    onTogglePlay(val)
   }
   toggleCover = () => {
     this.setState({
       showCover: !this.state.showCover
     })
   }
-  render () {
-    let {
-      lrcArr,
-      showCover,
-      curLrc,
-    } = this.state
-    let {
-      cover,
-      playing,
-      duration,
-      curTimeStamp
-    } = this.props.playDetail
+  componentWillUpdate(nextProps, nextState) {
+    console.log(this)
+    // console.log(nextProps, nextState)
+    // let { lrcArr } = this.state
+    // let curTimeStamp = nextProps.playDetail.curTimeStamp
+    // let obj = {}
+    // if (lrcArr) {
+    //   let idx = lrcArr.findIndex(
+    //     line => line.timeStamp === this.formatToTime(curTimeStamp)
+    //   )
+    //   if (idx >= 0) {
+    //     // 滚动歌词
+    //     this.scrollLrc(idx)
+    //     // 歌词高亮
+    //     let tempArr = lrcArr.map(line => ({
+    //       ...line,
+    //       active: line.timeStamp === this.formatToTime(curTimeStamp)
+    //     }))
+    //     obj.lrcArr = tempArr
+    //     obj.curLrc = lrcArr[idx]
+    //   }
+    // }
+    // this.setState(obj)
+  }
+  render() {
+    let { lrcArr, showCover, curLrc } = this.state
+    let { cover, playing, duration, curTimeStamp, mode } = this.props.playDetail
+    let { onToggleMode, onTimeChange } = this.props
     // let detail = this.state.detail
     let lrcList
     if (lrcArr && lrcArr.length > 0) {
@@ -230,7 +251,7 @@ class Play extends React.Component {
               value={curTimeStamp}
               min={0}
               max={Math.floor(duration / 1000)}
-              onChange={this.onTimeChange.bind(this)}
+              onChange={onTimeChange}
               onAfterChange={this.onAfterTimeChange.bind(this)}
               onClick={() => {
                 console.log(555)
@@ -242,7 +263,10 @@ class Play extends React.Component {
             </span>
           </div>
           <div styleName="play-btns">
-            <span className="iconfont icon-danqu" />
+            <span
+              className={"iconfont icon-" + mode.icon}
+              onClick={onToggleMode.bind(this)}
+            />
             <span className="iconfont icon-prev" />
             <span
               className={`iconfont ${playing ? "icon-pause" : "icon-play1"}`}

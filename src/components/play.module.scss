@@ -121,12 +121,12 @@
         align-items: center;
         :global(.iconfont){
             text-align: center;
-            @include fs(0.6rem);
+            @include fs(0.7rem);
             flex: 1;
             touch-action: none;
         }
         :global(.icon-play1),:global(.icon-pause){
-            @include fs(1.3rem);
+            @include fs(1.5rem);
         }
     }
 }

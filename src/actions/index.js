@@ -57,12 +57,23 @@ export const playContinue = () => ({
 export const playPause = () => ({
   type: "PLAY_PAUSE"
 })
-export const togglePlayStatus = playing => ({
-  type: "TOGGLE_PLAY_STATUS",
+export const togglePlay = playing => ({
+  type: "TOGGLE_PLAY",
   playing
+})
+export const toggleMode = () => ({
+  type: "TOGGLE_MODE"
 })
 export const timeUpdate = () => ({
   type: "TIME_UPDATE",
   curTimeStamp: document.querySelector(".player").currentTime
+})
+export const timeChange = timeStamp => ({
+  type: "TIME_CHANGE",
+  curTimeStamp: timeStamp
+})
+export const afterTimeChange = timeStamp => ({
+  type: "AFTER_TIME_CHANGE",
+  curTimeStamp: timeStamp
 })
 
