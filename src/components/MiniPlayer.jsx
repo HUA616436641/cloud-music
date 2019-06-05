@@ -6,7 +6,7 @@ export default class MiniPlayer extends React.Component {
     setTimeout(() => {
       document.querySelector(".player").play()
       togglePlay(true)
-    }, 5000)
+    }, 1000)
   }
   render() {
     let { songUrl, draging } = this.props.playDetail

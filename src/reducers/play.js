@@ -33,11 +33,9 @@ export const play = (state = playInfo, action) => {
         ...rest
       }
     case "TIME_UPDATE":
-      let finished = parseInt(rest.curTimeStamp * 1000) === state.duration
       return {
         ...state,
-        ...rest,
-        playing: !finished
+        ...rest
       }
     case "TIME_CHANGE":
       return {
@@ -61,14 +59,13 @@ export const play = (state = playInfo, action) => {
       }
       return state
     case "NEXT":
+      console.log(123)
       return state
     case "PREV":
       return state
     case "PAUSE":
       return state
     case "CONTINUE":
-      return state
-    case "UPDATE_MODE":
       return state
     default:
       return state

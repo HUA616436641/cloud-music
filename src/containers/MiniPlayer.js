@@ -1,7 +1,16 @@
 import { connect } from "react-redux"
-import { playNext, playPrev, togglePlay, timeUpdate } from "../actions"
+import actions from "../actions"
 import MiniPlayer from "../components/MiniPlayer"
 
+let { playNext, playPrev, togglePlay, timeUpdate } = actions
+export const onTimeUpdate = () => (dispatch, getState) => {
+  let player = document.querySelector(".player")
+  let curTimeStamp = player ? player.currentTime : 0
+  let { duration } = getState().play
+  let finished = parseInt(curTimeStamp*10) === parseInt(duration/100)
+  dispatch(timeUpdate({ curTimeStamp, playing: !finished }))
+  finished && dispatch(playNext())
+}
 const mapStateToProps = state => ({
   playDetail: state.play,
   playlist: state.playlist
@@ -9,9 +18,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   togglePlay: playing => dispatch(togglePlay(playing)),
-  onTimeUpdate: () => {
-    dispatch(timeUpdate())
-  },
+  onTimeUpdate: () => dispatch(onTimeUpdate()),
   onPlayNext: () => dispatch(playNext()),
   onPlayPrev: () => dispatch(playPrev())
 })

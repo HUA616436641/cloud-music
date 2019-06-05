@@ -1,7 +1,8 @@
-import { connect } from 'react-redux'
-import { startPlay, updatePlaylist } from '../actions'
-import Playlist from '../components/Playlist'
+import { connect } from "react-redux"
+import actions from "../actions"
+import Playlist from "../components/Playlist"
 
+let { updatePlaylist } = actions
 const mapStateToProps = state => ({
   // currentPlay: state.currentPlay,
   // playList: state.playList

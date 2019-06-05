@@ -8,15 +8,7 @@ import "./play.module.scss"
 let lrcScroll
 class Play extends React.Component {
   state = {
-    // songUrl: "",
-    // cover: "",
     lrcArr: undefined,
-    // curTimeStamp: 0,
-    // duration: 0,
-    // 是否拖动状态
-    // draging: false,
-    // 是否播放状态
-    // playing: false,
     showCover: true,
     curLrc: undefined
   }
@@ -24,17 +16,7 @@ class Play extends React.Component {
     let { getSongDetail } = this.props
     let id = this.props.match.params.id
     if (!id) return
-    // home.getSongDetail({ ids: id }).then(res => {
-    //   // this.setState({
-    //   //   duration: res.songs[0].dt,
-    //   //   cover: res.songs[0].al.cover
-    //   // })
-    //   let params = {
-    //     duration: res.songs[0].dt,
-    //     cover: res.songs[0].al.picUrl
-    //   }
-    getSongDetail(id)
-    // })
+    getSongDetail(id - 0)
   }
   componentDidMount() {
     let id = this.props.match.params.id
@@ -48,23 +30,9 @@ class Play extends React.Component {
       }
       this.setState(obj)
     })
-    // home.getSongUrl({ id }).then(res => {
-    //   // this.setState({
-    //   //   songUrl: res.data[0].url
-    //   // })
-    //   startPlay({songUrl: res.data[0].url})
-    // })
     let wrapper = document.querySelector(".lrc-wrap")
     lrcScroll = new BScroll(wrapper, {})
   }
-  // onCanPlayThrough = () => {
-  //   setTimeout(() => {
-  //     document.querySelector(".player").play()
-  //     this.setState({
-  //       playing: true
-  //     })
-  //   }, 500)
-  // }
   formatToTime(timeStamp) {
     let m = Math.floor(timeStamp / 60)
     m < 10 && (m = "0" + m)
@@ -91,55 +59,6 @@ class Play extends React.Component {
     })
     return res
   }
-  onTimeUpdate = () => {
-    let { lrcArr, draging } = this.state
-    let curTimeStamp = document.querySelector(".player").currentTime
-    let obj = {}
-    if (lrcArr) {
-      let idx = lrcArr.findIndex(
-        line => line.timeStamp === this.formatToTime(curTimeStamp)
-      )
-      if (idx >= 0) {
-        // 滚动歌词
-        this.scrollLrc(idx)
-        // 歌词高亮
-        let tempArr = lrcArr.map(line => ({
-          ...line,
-          active: line.timeStamp === this.formatToTime(curTimeStamp)
-        }))
-        obj.lrcArr = tempArr
-        obj.curLrc = lrcArr[idx]
-      }
-    }
-    if (!draging) {
-      obj.curTimeStamp = curTimeStamp
-    }
-    this.setState(obj)
-  }
-  // onTimeChange(val) {
-  //   // 设置播放时间
-  //   this.setState({
-  //     draging: true,
-  //     curTimeStamp: val
-  //   })
-  // }
-  // onAfterTimeChange(val) {
-  //   let { lrcArr } = this.state
-  //   this.setState({
-  //     curTimeStamp: val
-  //   })
-  //   document.querySelector(".player").currentTime = val
-  //   this.setState({
-  //     draging: false
-  //   })
-  //   // 滚动歌词
-  //   if (lrcArr) {
-  //     let idx = lrcArr.findIndex(
-  //       line => line.timeStamp === this.formatToTime(val)
-  //     )
-  //     idx >= 0 && this.scrollLrc(idx)
-  //   }
-  // }
   onAfterTimeChange(val) {
     let { onAfterTimeChange } = this.props
     onAfterTimeChange(val)
@@ -154,7 +73,6 @@ class Play extends React.Component {
     let { onTogglePlay } = this.props
     let player = document.querySelector(".player")
     let val
-    // console.log(player)
     if (player.paused) {
       player.play()
       val = true
@@ -162,48 +80,54 @@ class Play extends React.Component {
       player.pause()
       val = false
     }
-    onTogglePlay(val)
+    setTimeout(() => {
+      onTogglePlay(val)
+    })
   }
   toggleCover = () => {
     this.setState({
       showCover: !this.state.showCover
     })
   }
-  componentWillUpdate(nextProps, nextState) {
-    console.log(this)
-    // console.log(nextProps, nextState)
-    // let { lrcArr } = this.state
-    // let curTimeStamp = nextProps.playDetail.curTimeStamp
-    // let obj = {}
-    // if (lrcArr) {
-    //   let idx = lrcArr.findIndex(
-    //     line => line.timeStamp === this.formatToTime(curTimeStamp)
-    //   )
-    //   if (idx >= 0) {
-    //     // 滚动歌词
-    //     this.scrollLrc(idx)
-    //     // 歌词高亮
-    //     let tempArr = lrcArr.map(line => ({
-    //       ...line,
-    //       active: line.timeStamp === this.formatToTime(curTimeStamp)
-    //     }))
-    //     obj.lrcArr = tempArr
-    //     obj.curLrc = lrcArr[idx]
-    //   }
-    // }
-    // this.setState(obj)
+  isLrcActive(index, curTimeStamp) {
+    curTimeStamp = parseInt(curTimeStamp)
+    let idx = this.state.lrcArr.findIndex((v, i, arr) => {
+      return v.timeStamp && arr[i + 1].timeStamp
+        ? this.formatToNum(v.timeStamp) <= curTimeStamp &&
+            this.formatToNum(arr[i + 1].timeStamp) > curTimeStamp
+        : false
+    })
+    return idx === index
+  }
+  componentWillReceiveProps(a,b) {
+    console.log(a,b)
+  }
+  componentWillUpdate(nextProps) {
+    let { lrcArr } = this.state
+    let { curTimeStamp } = nextProps.playDetail
+    if (lrcArr) {
+      let idx = lrcArr.findIndex(
+        line => line.timeStamp === this.formatToTime(parseInt(curTimeStamp))
+      )
+      if (idx >= 0) {
+        // 滚动歌词
+        this.scrollLrc(idx)
+      }
+    }
   }
   render() {
     let { lrcArr, showCover, curLrc } = this.state
     let { cover, playing, duration, curTimeStamp, mode } = this.props.playDetail
-    let { onToggleMode, onTimeChange } = this.props
-    // let detail = this.state.detail
+    let { onToggleMode, onTimeChange, onPlayNext, onPlayPrev } = this.props
     let lrcList
     if (lrcArr && lrcArr.length > 0) {
+      // 歌词高亮
       lrcList = lrcArr.map((item, index) => (
         <div
           className="lrc-item"
-          styleName={`lrc-item ${item.active ? "active" : ""}`}
+          styleName={`lrc-item ${
+            this.isLrcActive(index, curTimeStamp) ? "active" : ""
+          }`}
           key={index}
         >
           {item.content}
@@ -212,7 +136,6 @@ class Play extends React.Component {
     } else {
       lrcList = (
         <div styleName="loading">
-          {" "}
           {lrcArr === undefined ? "加载中。。。" : "暂无歌词"}
         </div>
       )
@@ -267,12 +190,18 @@ class Play extends React.Component {
               className={"iconfont icon-" + mode.icon}
               onClick={onToggleMode.bind(this)}
             />
-            <span className="iconfont icon-prev" />
+            <span className="iconfont icon-prev" onClick={onPlayPrev} />
             <span
               className={`iconfont ${playing ? "icon-pause" : "icon-play1"}`}
               onClick={this.togglePlay.bind(this)}
             />
-            <span className="iconfont icon-next" />
+
+            <span
+              className="iconfont icon-next"
+              onClick={() => {
+                this.props.history.push(`/play/30780431`)
+              }}
+            />
             <span className="iconfont icon-play-list" />
           </div>
         </div>

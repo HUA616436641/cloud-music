@@ -1,35 +1,35 @@
-import React from "react";
+import React from "react"
 // import { Icon } from 'antd-mobile'
-import { withRouter } from "react-router";
-import "./playlist.module.scss";
-import { home } from "../api";
+import { withRouter } from "react-router"
+import "./playlist.module.scss"
+import { home } from "../api"
 
 class Playlist extends React.Component {
   constructor() {
-    super();
+    super()
     this.state = {
       detail: {
         creator: {},
         tracks: []
       }
-    };
+    }
   }
   componentWillMount() {
-    let id = this.props.match.params.id;
-    if (!id) return;
+    let id = this.props.match.params.id
+    if (!id) return
     home.getPlayListDetail({ id }).then(res => {
       this.setState({
         detail: res.playlist
-      });
-    });
+      })
+    })
   }
   onSongClick(song) {
-    let { onPlay } = this.props;
-    this.props.history.push(`/play/${song.id}`);
-    onPlay(song, this.state.detail.tracks);
+    let { onPlay } = this.props
+    this.props.history.push(`/play/${song.id}`)
+    onPlay(song, this.state.detail.tracks)
   }
   render() {
-    let detail = this.state.detail;
+    let detail = this.state.detail
     return (
       <div className="content">
         <div styleName="detail">
@@ -73,7 +73,7 @@ class Playlist extends React.Component {
           ))}
         </div>
       </div>
-    );
+    )
   }
 }
-export default withRouter(Playlist);
+export default withRouter(Playlist)

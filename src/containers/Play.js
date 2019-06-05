@@ -1,5 +1,7 @@
 import { connect } from "react-redux"
-import {
+import actions from "../actions"
+import Play from "../components/Play"
+let {
   getSongDetail,
   playNext,
   playPrev,
@@ -9,9 +11,7 @@ import {
   togglePlay,
   timeChange,
   afterTimeChange
-} from "../actions"
-import Play from "../components/Play"
-
+} = actions
 const mapStateToProps = state => {
   return {
     playDetail: state.play
@@ -22,8 +22,8 @@ const mapDispatchToProps = dispatch => ({
   getSongDetail: id => {
     return dispatch(getSongDetail(id))
   },
-  onPlayPrev: () => dispatch(playNext()),
-  onPlayNext: () => dispatch(playPrev()),
+  onPlayPrev: () => dispatch(playPrev()),
+  onPlayNext: () => dispatch(playNext()),
   onPlayPause: () => dispatch(playPause()),
   onPlayContinue: () => dispatch(playContinue()),
   onToggleMode: () => dispatch(toggleMode()),
