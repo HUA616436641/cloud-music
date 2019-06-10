@@ -23,13 +23,13 @@ class Play extends React.Component {
     curLrc: undefined,
     playlistVisible: false
   }
-  componentWillMount() {
+  componentWillMount () {
     let { getSongDetail } = this.props
     let id = this.props.match.params.id
     if (!id) return
     getSongDetail(id - 0)
   }
-  componentDidMount() {
+  componentDidMount () {
     let id = this.props.match.params.id
     home.getLyric({ id }).then(res => {
       let obj = {}
@@ -44,19 +44,19 @@ class Play extends React.Component {
     let wrapper = document.querySelector(".lrc-wrap")
     lrcScroll = new BScroll(wrapper, { click: true })
   }
-  formatToTime(timeStamp) {
+  formatToTime (timeStamp) {
     let m = Math.floor(timeStamp / 60)
     m < 10 && (m = "0" + m)
     let s = Math.floor(timeStamp % 60)
     s < 10 && (s = "0" + s)
     return `${m}:${s}`
   }
-  formatToNum(time) {
+  formatToNum (time) {
     let m = parseInt(time.split(":")[0])
     let s = parseInt(time.split(":")[1])
     return 60 * m + s
   }
-  parseLrc(text) {
+  parseLrc (text) {
     let res = text.split("\n")
     let timeReg = /^\[(\d{2}):(\d{2})\.(\d*)\]/
     res = res.map(line => {
@@ -70,17 +70,17 @@ class Play extends React.Component {
     })
     return res
   }
-  onAfterTimeChange(val) {
+  onAfterTimeChange (val) {
     let { onAfterTimeChange } = this.props
     onAfterTimeChange(val)
     document.querySelector(".player").currentTime = val
   }
-  scrollLrc(idx) {
+  scrollLrc (idx) {
     let el = document.querySelector(".lrc-list")
     let lrcEl = el.querySelectorAll(".lrc-item")[idx]
     lrcScroll.scrollToElement(lrcEl, 300, 0, -150)
   }
-  togglePlay() {
+  togglePlay () {
     let { onTogglePlay } = this.props
     let player = document.querySelector(".player")
     let val
@@ -100,23 +100,23 @@ class Play extends React.Component {
       showCover: !this.state.showCover
     })
   }
-  isLrcActive(index, curTimeStamp) {
+  isLrcActive (index, curTimeStamp) {
     curTimeStamp = parseInt(curTimeStamp)
     let idx = this.state.lrcArr.findIndex((v, i, arr) => {
       return v.timeStamp && arr[i + 1].timeStamp
         ? this.formatToNum(v.timeStamp) <= curTimeStamp &&
-            this.formatToNum(arr[i + 1].timeStamp) > curTimeStamp
+        this.formatToNum(arr[i + 1].timeStamp) > curTimeStamp
         : false
     })
     return idx === index
   }
-  showPlaylist() {
+  showPlaylist () {
     this.setState({ playlistVisible: true })
   }
-  hidePlaylist() {
+  hidePlaylist () {
     this.setState({ playlistVisible: false })
   }
-  cellRenderer({ index, key, parent, style }) {
+  cellRenderer ({ index, key, parent, style }) {
     let { getSongDetail, playDetail } = this.props
     let detail = this.props.playlist[index]
     return (
@@ -128,19 +128,24 @@ class Play extends React.Component {
         rowIndex={index}
       >
         <div
-          styleName="song-item"
+          styleName={`song-item ${playDetail.id === detail.id ? 'active' : ''}`}
           style={style}
           onClick={() => getSongDetail(detail.id)}
         >
           <div styleName="lt">
-            {playDetail.id === detail.id ? "===" : ""}
+            {
+              playDetail.id === detail.id &&
+              <span
+                className="iconfont icon-guangbo"
+              />
+            }
             {detail.name}
             <span styleName="author">
               &nbsp;-&nbsp; {detail.ar.map(v => v.name).join("/")}
             </span>
           </div>
           <span
-            className="iconfont icon-shanchu"
+            className="iconfont icon-guanbi"
             styleName="rt"
             onClick={e => {
               e.stopPropagation()
@@ -151,13 +156,13 @@ class Play extends React.Component {
       </CellMeasurer>
     )
   }
-  onClearPlaylist() {
+  onClearPlaylist () {
     let { onClearPlaylist, stopPlay } = this.props
     this.props.history.push(`/home`)
     stopPlay()
     onClearPlaylist()
   }
-  onDeletePlaylist(id) {
+  onDeletePlaylist (id) {
     let {
       onDeletePlaylist,
       playlist,
@@ -174,7 +179,7 @@ class Play extends React.Component {
     }
     onDeletePlaylist(id)
   }
-  componentWillUpdate(nextProps) {
+  componentWillUpdate (nextProps) {
     let { lrcArr } = this.state
     let { curTimeStamp } = nextProps.playDetail
     if (lrcArr) {
@@ -187,7 +192,7 @@ class Play extends React.Component {
       }
     }
   }
-  render() {
+  render () {
     let { lrcArr, showCover, curLrc } = this.state
     let { cover, playing, duration, curTimeStamp, mode } = this.props.playDetail
     let playlist = this.props.playlist
@@ -200,7 +205,7 @@ class Play extends React.Component {
           className="lrc-item"
           styleName={`lrc-item ${
             this.isLrcActive(index, curTimeStamp) ? "active" : ""
-          }`}
+            }`}
           key={index}
         >
           {item.content}

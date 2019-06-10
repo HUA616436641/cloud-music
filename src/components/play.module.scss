@@ -11,6 +11,7 @@
   content: "";
   position: absolute;
   width: 100%;
+  left: 0;
   top: 0;
   bottom: 0;
   background-size: cover;
@@ -166,13 +167,20 @@
     padding-right: 0.5rem;
     flex: 1 1 auto;
     text-align: left;
+    :global(.icon-guangbo){
+      margin-right: 0.2rem;
+    }
   }
   .rt{
     padding-right: 0.3rem;
     flex: 0 1 auto;
+    color: #ddd;
   }
   .author {
     color: #ddd;
     font-size: 0.3rem;
   }
+}
+.song-item.active .lt, .song-item.active .author{
+    color: red;
 }

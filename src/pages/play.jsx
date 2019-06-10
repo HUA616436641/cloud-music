@@ -1,7 +1,6 @@
 import React from 'react';
 import { NavBar, Icon } from 'antd-mobile';
 import Player from '@/containers/Play'
-import MiniPlay from '@/containers/MiniPlay'
 import './play.module.scss'
 export default class Play extends React.Component {
   state = {
@@ -20,7 +19,6 @@ export default class Play extends React.Component {
         >
         </NavBar>
         <Player></Player>
-        <MiniPlay></MiniPlay>
       </div>
     )
   }

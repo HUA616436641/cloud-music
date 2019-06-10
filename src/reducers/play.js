@@ -1,11 +1,13 @@
 let playInfo = {
   id: undefined,
+  name: '',
   songUrl: "",
   cover: "",
   curTimeStamp: 0,
   duration: 0,
   playing: false,
   draging: false,
+  author: [],
   mode: { name: "ORDER", icon: "danqu" }
 }
 const modes = [
@@ -62,12 +64,14 @@ export const play = (state = playInfo, action) => {
       return {
         ...state,
         id: undefined,
+        name: '',
         songUrl: "",
         cover: "",
         curTimeStamp: 0,
         duration: 0,
         playing: false,
         draging: false,
+        author: [],
         mode: { name: "ORDER", icon: "danqu" }
       }
     default:

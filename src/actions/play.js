@@ -7,7 +7,9 @@ export const getSongDetail = id => async dispatch => {
   let song = {
     id,
     songUrl: res[0].data[0].url,
+    name: res[1].songs[0].name,
     duration: res[1].songs[0].dt,
+    author: res[1].songs[0].ar,
     cover: res[1].songs[0].al.picUrl
   }
   return dispatch(startPlay(song))

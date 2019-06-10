@@ -1,9 +1,50 @@
 @import '~styles/mixin';
 @import "~bourbon/core/_bourbon.scss";
 .mini-play{
-  position: fixed;
-  .player{
-    z-index: -9999;
-    visibility: hidden;
+  position: relative;
+  flex: 0 0 auto;
+  display: flex;
+  padding: 0.3rem;
+  background: rgba(39, 29, 29, 0.5)
+}
+.background{
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.4;
+  filter: blur(0.2rem);
+}
+.song-info{
+  @include ellipsis;
+  padding-right:1rem;
+  flex: 1 1 auto;
+  font-size: 0.3rem;
+  align-items: center;
+  display: flex;
+  .cover{
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    margin-right: 0.2rem;
+  }
+  .text{
+    @include ellipsis;
+  }
+  .name{
+    @include ellipsis;
+    margin-bottom:0.1rem;
+    font-size: 0.4rem;
+  }
+  .author{
+  }
+}
+.btns{
+  display: flex;
+  align-items: center;
+  :global(.iconfont){
+    margin-right: 0.5rem;
+    font-size: 0.6rem;
   }
 }

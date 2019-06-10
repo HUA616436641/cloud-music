@@ -1,7 +1,7 @@
 import React from "react"
 import { NavBar, Icon } from "antd-mobile"
 import { home } from "../api"
-import MiniPlayerCtr from "@/containers/MiniPlay"
+import MiniPlayCtr from "@/containers/MiniPlay"
 import PlaylistCtr from "@/containers/Playlist"
 import { goBack } from "@/utils"
 export default class Playlist extends React.Component {
@@ -40,7 +40,7 @@ export default class Playlist extends React.Component {
           // ]}
         />
         <PlaylistCtr> </PlaylistCtr>
-        <MiniPlayerCtr />
+        <MiniPlayCtr />
       </div>
     )
   }
