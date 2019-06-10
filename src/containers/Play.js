@@ -10,11 +10,15 @@ let {
   toggleMode,
   togglePlay,
   timeChange,
-  afterTimeChange
+  afterTimeChange,
+  clearPlaylist,
+  deletePlaylist,
+  stopPlay
 } = actions
 const mapStateToProps = state => {
   return {
-    playDetail: state.play
+    playDetail: state.play,
+    playlist: state.playlist
   }
 }
 
@@ -29,7 +33,10 @@ const mapDispatchToProps = dispatch => ({
   onToggleMode: () => dispatch(toggleMode()),
   onTogglePlay: val => dispatch(togglePlay(val)),
   onTimeChange: timeStamp => dispatch(timeChange(timeStamp)),
-  onAfterTimeChange: timeStamp => dispatch(afterTimeChange(timeStamp))
+  onAfterTimeChange: timeStamp => dispatch(afterTimeChange(timeStamp)),
+  onClearPlaylist: () => dispatch(clearPlaylist()),
+  onDeletePlaylist: id => dispatch(deletePlaylist(id)),
+  stopPlay: () => dispatch(stopPlay()),
 })
 
 export default connect(

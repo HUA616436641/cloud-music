@@ -58,15 +58,18 @@ export const play = (state = playInfo, action) => {
         }
       }
       return state
-    case "NEXT":
-      console.log(123)
-      return state
-    case "PREV":
-      return state
-    case "PAUSE":
-      return state
-    case "CONTINUE":
-      return state
+    case "STOP":
+      return {
+        ...state,
+        id: undefined,
+        songUrl: "",
+        cover: "",
+        curTimeStamp: 0,
+        duration: 0,
+        playing: false,
+        draging: false,
+        mode: { name: "ORDER", icon: "danqu" }
+      }
     default:
       return state
   }

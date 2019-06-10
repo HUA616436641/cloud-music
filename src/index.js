@@ -3,14 +3,17 @@ import ReactDOM from "react-dom"
 import { createStore, applyMiddleware } from "redux"
 import { Provider } from "react-redux"
 import thunk from "redux-thunk"
-// import App from './App';
 import "amfe-flexible"
+// import from 'vconsole'
 import * as serviceWorker from "./serviceWorker"
 import "./styles/common.scss"
-import Router from "./route"
+import App from "./App"
 import rootReducer from "./reducers"
 // import './assets/font/iconfont.css'
+import Player from "@/containers/Player"
 
+// let VConsole = require("vconsole")
+// new VConsole()
 const { composeWithDevTools } = require("redux-devtools-extension")
 const middleware = [thunk]
 const store = createStore(
@@ -20,7 +23,8 @@ const store = createStore(
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router />
+    <Player />
+    <App />
   </Provider>,
   document.getElementById("root")
 )

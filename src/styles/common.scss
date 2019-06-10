@@ -7,7 +7,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-*{
+body{
   font-size: 0.3rem;
   color: #fff;
 }
@@ -53,6 +53,12 @@ code {
     overflow: auto;
     flex: 1 1 auto;
   }
+}
+.fl{
+  float: left;
+}
+.fr{
+  float: right;
 }
 @mixin ellipsis{
   white-space: nowrap;

@@ -2,16 +2,16 @@ import { connect } from "react-redux"
 import actions from "../actions"
 import Playlist from "../components/Playlist"
 
-let { updatePlaylist } = actions
+let { updatePlaylist, updateCache } = actions
 const mapStateToProps = state => ({
-  // currentPlay: state.currentPlay,
-  // playList: state.playList
+  cache: state.cache
 })
 
 const mapDispatchToProps = dispatch => ({
-  onPlay: (song, playlist) => {
+  updatePlaylist: playlist => {
     dispatch(updatePlaylist(playlist))
-  }
+  },
+  updateCache: cache => dispatch(updateCache(cache))
 })
 
 export default connect(

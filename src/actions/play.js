@@ -18,6 +18,10 @@ export const startPlay = song => ({
   song
 })
 
+export const stopPlay = () => ({
+  type: "STOP"
+})
+
 export const updatePlaylist = playlist => ({
   type: "UPDATE_PLAY_LIST",
   playlist

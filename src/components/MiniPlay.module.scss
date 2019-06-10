@@ -1,0 +1,9 @@
+@import '~styles/mixin';
+@import "~bourbon/core/_bourbon.scss";
+.mini-play{
+  position: fixed;
+  .player{
+    z-index: -9999;
+    visibility: hidden;
+  }
+}

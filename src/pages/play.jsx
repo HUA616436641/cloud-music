@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavBar, Icon } from 'antd-mobile';
 import Player from '@/containers/Play'
-import MiniPlayer from '@/containers/MiniPlayer'
+import MiniPlay from '@/containers/MiniPlay'
 import './play.module.scss'
 export default class Play extends React.Component {
   state = {
@@ -9,8 +9,7 @@ export default class Play extends React.Component {
   }
   render () {
     return (
-      <div className="common-page" styleName="common-page">
-        <div styleName="background" style={{ backgroundImage: 'url(' + this.state.picUrl + ')' }}></div>
+      <div className="common-page">
         <NavBar
           mode="light"
           icon={<Icon type="left" />}
@@ -21,7 +20,7 @@ export default class Play extends React.Component {
         >
         </NavBar>
         <Player></Player>
-        <MiniPlayer></MiniPlayer>
+        <MiniPlay></MiniPlay>
       </div>
     )
   }

@@ -1,19 +1,12 @@
 import React from "react"
-import "./MiniPlayer.module.scss"
-export default class MiniPlayer extends React.Component {
-  onCanPlayThrough = () => {
-    let { togglePlay } = this.props
-    setTimeout(() => {
-      document.querySelector(".player").play()
-      togglePlay(true)
-    }, 1000)
-  }
+import "./MiniPlay.module.scss"
+export default class MiniPlay extends React.Component {
   render() {
     let { songUrl, draging } = this.props.playDetail
     let { onTimeUpdate } = this.props
     return (
-      <div styleName="mini-player">
-        <audio
+      <div styleName="mini-play">
+        {/* <audio
           src={songUrl}
           controls
           styleName="player"
@@ -22,7 +15,7 @@ export default class MiniPlayer extends React.Component {
             !draging && onTimeUpdate()
           }}
           onCanPlayThrough={this.onCanPlayThrough}
-        />
+        /> */}
       </div>
     )
   }

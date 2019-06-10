@@ -1,9 +1,9 @@
 import React from "react"
 import { NavBar, Icon } from "antd-mobile"
 import { home } from "../api"
-import MiniPlayerCtr from "@/containers/MiniPlayer"
+import MiniPlayerCtr from "@/containers/MiniPlay"
 import PlaylistCtr from "@/containers/Playlist"
-
+import { goBack } from "@/utils"
 export default class Playlist extends React.Component {
   constructor() {
     super()
@@ -27,13 +27,12 @@ export default class Playlist extends React.Component {
     this.props.history.push(`/play/${song.id}`)
   }
   render() {
-    let detail = this.state.detail
     return (
       <div className="common-page">
         <NavBar
           mode="light"
           icon={<Icon type="left" />}
-          onLeftClick={() => console.log("onLeftClick")}
+          onLeftClick={goBack}
           rightContent={[<Icon key="0" type="search" />]}
           // rightContent={[
           //     <Icon key="0" type="search" style={{ marginRight: '16px' }} />,
