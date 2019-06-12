@@ -1,27 +1,39 @@
-import axios from 'axios'
-import qs from 'qs'
-import { Toast } from 'antd-mobile';
-
-// let baseURL = 'http://localhost:9999'
-// let baseURL = 'http://192.168.10.115:9999'
-let baseURL = 'http://192.168.1.104:9999'
+import axios from "axios"
+import qs from "qs"
+import { Toast } from "antd-mobile"
+console.log(process.env.NODE_ENV)
+let baseURL =
+  process.env.NODE_ENV === "devlopment"
+    ? "http://localhost:9999"
+    : "http://101.132.166.208:9999"
+// let baseURL = "http://192.168.10.115:9999"
+// let baseURL = 'http://192.168.1.104:9999'
 axios.defaults.withCredentials = true
-axios.interceptors.request.use(config => {
+axios.interceptors.request.use(
+  config => {
     return config
-}, error => {
+  },
+  error => {
     return Promise.reject(error)
-})
+  }
+)
 
-axios.interceptors.response.use(response => {
+axios.interceptors.response.use(
+  response => {
     return response.data
-}, error => {
-    if (error.code === 'ECONNABORTED' && error.message.indexOf('timeout') !== -1) {
-        Toast.offline('请求超时', 1);
-        return
+  },
+  error => {
+    if (
+      error.code === "ECONNABORTED" &&
+      error.message.indexOf("timeout") !== -1
+    ) {
+      Toast.offline("请求超时", 1)
+      return
     }
-    Toast.fail(error.message, 1);
+    Toast.fail(error.message, 1)
     return Promise.reject(error)
-})
+  }
+)
 
 // function checkStatus (response) {
 //     // loading
@@ -49,28 +61,32 @@ axios.interceptors.response.use(response => {
 // }
 
 export default {
-    post (url, data) {
-        return axios({
-            method: 'post',
-            baseURL,
-            url,
-            data: qs.stringify(data),
-            timeout: 10000,
-            withCredentials: true,
-            // headers: {
-            //     'X-Requested-With': 'XMLHttpRequest',
-            //     'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-            // }
-        })
-    },
-    get (url, params) {
-        return axios({
-            method: 'get',
-            baseURL,
-            url,
-            params, // get 请求时带的参数
-            timeout: 10000,
-            withCredentials: true,
-        })
-    }
+  post(url, data, { headers }) {
+    return axios({
+      method: "post",
+      baseURL,
+      url,
+      data:
+        headers["Content-Type"] === "multipart/form-data"
+          ? data
+          : qs.stringify(data),
+      timeout: 10000,
+      withCredentials: true,
+      headers
+      // headers: {
+      //     'X-Requested-With': 'XMLHttpRequest',
+      //     'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+      // }
+    })
+  },
+  get(url, params) {
+    return axios({
+      method: "get",
+      baseURL,
+      url,
+      params, // get 请求时带的参数
+      timeout: 10000,
+      withCredentials: true
+    })
+  }
 }
