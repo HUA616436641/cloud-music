@@ -20,8 +20,6 @@ const store = createStore(
   rootReducer,
   composeWithDevTools(applyMiddleware(...middleware))
 )
-alert()
-alert(2)
 ReactDOM.render(
   <Provider store={store}>
     <Player />
